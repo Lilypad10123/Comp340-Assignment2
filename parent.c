@@ -7,10 +7,25 @@
 
 void *pause(void*);
 
+typedef struct {
+	pid_t id = rand() % 4 + 6;
+} child;
+
 int main() {
 	pthread_t tid;
 	pthread_create(&tid, NULL, pause, NULL);
 	pthread_join(tid, NULL);
+
+	time_t t;
+	int i;
+	for(i=0; i<5; i++) {
+		srand((unsigned) time(&t));
+		FILE *file;
+		pid_t num = child -> id;
+		file = fopen("schedule.txt", "w");
+		fprintf(file, num);
+		fclose(file);
+	}
 
 	return EXIT_SUCCESS;
 }
